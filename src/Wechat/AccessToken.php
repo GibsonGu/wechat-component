@@ -63,10 +63,10 @@ class AccessToken
 			$response = $http->jsonPost(self::API_AUTHORIZER_TOKEN, $params);
 
 			// 设置token
-			$this->token = $response['authorizer_access_token'];
+			$this->token = $response->authorizer_access_token;
 
 			// 把token缓存起来
-			$expiresAt = \Carbon::now()->addSeconds($response['expires_in']);
+			$expiresAt = \Carbon::now()->addSeconds($response->expires_in);
 			\Cache::put($this->cacheKey, $this->token, $expiresAt);
 		}
 

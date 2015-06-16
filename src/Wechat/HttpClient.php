@@ -61,7 +61,7 @@ class HttpClient extends Http
 		// 文本或者json
 		$textMIME = '~application/json|text/plain~i';
 
-		$contents = JSON::decode($response['data'], true);
+		$contents = JSON::decode($response['data']);
 
 		// while the response is an invalid JSON structure, returned the source data
 		if (!preg_match($textMIME, $response['content_type'])
@@ -69,15 +69,15 @@ class HttpClient extends Http
 			return $response['data'];
 		}
 
-		if (isset($contents['errcode']) && 0 !== $contents['errcode']) {
-			if (empty($contents['errmsg'])) {
-				$contents['errmsg'] = 'Unknown';
+		if (isset($contents->errcode) && 0 !== $contents->errcode) {
+			if (empty($contents->errmsg)) {
+				$contents->errmsg = 'Unknown';
 			}
 
-			throw new Exception("[{$contents['errcode']}] ".$contents['errcode'], $contents['errcode']);
+			throw new Exception("[{$contents->errcode}] ".$contents->errcode, $contents->errcode);
 		}
 
-		if ($contents === array('errcode' => '0', 'errmsg' => 'ok')) {
+		if ((array)$contents === array('errcode' => '0', 'errmsg' => 'ok')) {
 			return true;
 		}
 
