@@ -4,7 +4,7 @@ return array(
 
 	'token' => '',
 
-	'encryptKey' => '',
+	'encodingAESKey' => '',
 
 	'appid' => '',
 

@@ -22,16 +22,14 @@ class WechatController extends Controller
 	{
 		$this->appid = \Config::get('wechat::appid');
 		$this->token = \Config::get('wechat::token');
-		$this->encryptKey = \Config::get('wechat::encryptKey');
-
-		$this->component = new Component();
+		$this->encodingAESKey = \Config::get('wechat::encodingAESKey');
 	}
 
 	public function authorize()
 	{
 		$appid = $this->appid;
 		$pre_auth_code = $this->createPreAuthCode();
-		$redirect_uri = urlencode(Request::getUri());
+		$redirect_uri = urlencode(\Request::getUri());
 
 		// 拼接出微信公众号登录授权页面url
 		$url = sprintf($this->component_login_page, $appid, $pre_auth_code, $redirect_uri);
@@ -41,12 +39,14 @@ class WechatController extends Controller
 
 	public function handleEvent()
 	{
+		\Log::debug('WechatPushMsg');
+
 		$request = $this->pushMsg();
 
-		switch ($request->InfoType)
+		switch ($request['InfoType'])
 		{
 			case 'component_verify_ticket':
-				ComponentVerifyTicket::setTicket($request->ComponentVerifyTicket);
+				ComponentVerifyTicket::setTicket($request['ComponentVerifyTicket']);
 				break;
 
 			case 'unauthorized':
@@ -71,7 +71,10 @@ class WechatController extends Controller
 				$postData
 		);
 
-		return simplexml_load_string($decryptMsg, 'SimpleXMLElement', LIBXML_NOCDATA);
+		\Log::debug('Input', \Input::all());
+		\Log::debug('decryptMsg', [$decryptMsg]);
+
+		return $decryptMsg;
 	}
 
 	/**
@@ -103,7 +106,8 @@ class WechatController extends Controller
 
 		if(!$pre_auth_code)
 		{
-			$response = $this->component->createPreAuthCode();
+			$component = new Component();
+			$response = $component->createPreAuthCode();
 			$pre_auth_code = $response->pre_auth_code;
 
 			// 把pre_auth_code缓存起来
