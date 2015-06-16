@@ -54,7 +54,7 @@ class AccessToken
 		if(!$this->token)
 		{
 			$params = array(
-					'component_appid' => \Config::get('wechat:component_appid'),
+					'component_appid' => \Config::get('wechat::appid'),
 					'authorizer_appid' => $this->authorizer_appid,
 					'authorizer_refresh_token' => $this->authorizer_refresh_token,
 			);

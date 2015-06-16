@@ -15,9 +15,9 @@ class WechatController extends Controller
 
 	public function __construct()
 	{
-		$this->appid = \Config::get('wechat:appid');
-		$this->token = \Config::get('wechat:token');
-		$this->encryptKey = \Config::get('wechat:encryptKey');
+		$this->appid = \Config::get('wechat::appid');
+		$this->token = \Config::get('wechat::token');
+		$this->encryptKey = \Config::get('wechat::encryptKey');
 	}
 
 	public function handleEvent()

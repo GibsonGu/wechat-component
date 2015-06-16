@@ -29,8 +29,8 @@ class ComponentAccessToken
 		if(!$this->token || $this->force)
 		{
 			$params = array(
-				'component_appid' => \Config::get('wechat:component_appid'),
-				'authorizer_appid' => \Config::get('wechat:component_appsecret'),
+				'component_appid' => \Config::get('wechat::appid'),
+				'authorizer_appid' => \Config::get('wechat::appsecret'),
 				'authorizer_refresh_token' => ComponentVerifyTicket::getTicket(),
 			);
 

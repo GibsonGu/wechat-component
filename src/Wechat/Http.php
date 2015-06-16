@@ -2,13 +2,11 @@
 
 class Http extends HttpClient
 {
+
 	public function __construct($token = null)
 	{
-//		if(!$token) {
-//			$token = new AccessToken();
-//		}
+		$this->authorizer_access_token = $token instanceof AccessToken ? $token->getToken() : $token;
 
-		$this->authorizer_access_token = $token;
 		parent::__construct();
 	}
 }

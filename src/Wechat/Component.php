@@ -29,9 +29,9 @@ class Component
 
 	public function __construct()
 	{
-		$this->http  = new ComponentHttp();
+		$this->http  = new ComponentHttp(new ComponentAccessToken());
 
-		$this->appid = \Config::get('wechat:appid');
+		$this->appid = \Config::get('wechat::appid');
 	}
 
 	/**
