@@ -1,0 +1,22 @@
+{
+    "name": "gibson/wechat",
+    "description": "微信公众号第三方平台开发 SDK for Laravel",
+    "keywords": ["wechat", "weixin","laravel", "sdk"],
+    "authors": [
+        {
+            "name": "Gibson",
+            "email": "bright.gu@gmail.com"
+        }
+    ],
+    "require": {
+        "laravel/framework": "4.2.*",
+        "overtrue/wechat": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gibson\\Wechat\\": "src/"
+        }
+      },
+    "minimum-stability": "stable",
+    "license": "MIT"
+}
