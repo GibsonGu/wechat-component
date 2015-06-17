@@ -9,7 +9,7 @@ class ComponentAccessToken
 
 	protected $cacheKey = 'gibson.wechat.component_access_token';
 
-	const API_AUTHORIZER_TOKEN = 'https:// api.weixin.qq.com/cgi-bin/component/api_authorizer_token';
+	const API_COMPONENT_TOKEN = 'https://api.weixin.qq.com/cgi-bin/component/api_component_token';
 
 	public function __construct($force = false)
 	{
@@ -30,12 +30,12 @@ class ComponentAccessToken
 		{
 			$params = array(
 				'component_appid' => \Config::get('wechat::appid'),
-				'authorizer_appid' => \Config::get('wechat::appsecret'),
-				'authorizer_refresh_token' => ComponentVerifyTicket::getTicket(),
+				'component_appsecret' => \Config::get('wechat::appsecret'),
+				'component_verify_ticket' => ComponentVerifyTicket::getTicket(),
 			);
 
 			$http = new ComponentHttp();
-			$response = $http->jsonPost(self::API_AUTHORIZER_TOKEN, $params);
+			$response = $http->jsonPost(self::API_COMPONENT_TOKEN, $params);
 
 			// 设置token
 			$this->token = $response['component_access_token'];

@@ -33,7 +33,7 @@ class AccessToken
 	 */
 	protected $cacheKey = 'gibson.wechat.authorizer_access_token.%s';
 
-	const API_AUTHORIZER_TOKEN = 'https:// api.weixin.qq.com/cgi-bin/component/api_authorizer_token';
+	const API_AUTHORIZER_TOKEN = 'https://api.weixin.qq.com/cgi-bin/component/api_authorizer_token';
 
 	public function __construct($authorizer_appid, $authorizer_refresh_token)
 	{

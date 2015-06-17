@@ -21,7 +21,6 @@ class WechatServiceProvider extends ServiceProvider {
 		$this->package('gibson/wechat');
 
 		include __DIR__ . '/../../filters.php';
-		include __DIR__ . '/../../routes.php';
 	}
 
 	/**
