@@ -2,7 +2,7 @@
 
 return array(
 
-	'encodingToken' => '',
+	'token' => '',
 
 	'encodingAESKey' => '',
 
