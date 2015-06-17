@@ -59,7 +59,7 @@ class AccessToken
 					'authorizer_refresh_token' => $this->authorizer_refresh_token,
 			);
 
-			$http = new ComponentHttp();
+			$http = new ComponentHttp(new ComponentAccessToken());
 			$response = $http->jsonPost(self::API_AUTHORIZER_TOKEN, $params);
 
 			// 设置token
