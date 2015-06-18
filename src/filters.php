@@ -13,7 +13,7 @@
 |
 */
 
-Route::filter('wechat', function()
+Route::filter('wechat.signature', function()
 {
 	// 获取到微信请求里包含的几项内容
 	$signature = Input::get('signature');
