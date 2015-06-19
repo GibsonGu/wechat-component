@@ -16,8 +16,9 @@ class Auth extends \Overtrue\Wechat\Auth
 	const API_TOKEN_REFRESH = 'https://api.weixin.qq.com/sns/oauth2/component/refresh_token'; //刷新access_token
 	const API_USER          = 'https://api.weixin.qq.com/sns/userinfo';
 
-	public function __construct()
+	public function __construct($appId)
 	{
+		$this->appId = $appId;
 		$this->input = new Input();
 		$this->http  = new ComponentHttp(new ComponentAccessToken());
 		$this->component_appid = Config::get('wechat::appid');
@@ -51,13 +52,13 @@ class Auth extends \Overtrue\Wechat\Auth
 	public function user()
 	{
 		$code = $this->input->get('code');
-		$appid = $this->input->get('appid');
+		$this->appId = $this->input->get('appid');
 
-		if ($this->authorizedUser || !$code || !$appid) {
+		if ($this->authorizedUser || !$code || !$this->appId) {
 			return $this->authorizedUser;
 		}
 
-		$permission = $this->getAccessPermission($appid, $code);
+		$permission = $this->getAccessPermission($code);
 
 		if ($permission['scope'] !== 'snsapi_userinfo') {
 			$user = new Bag(array('openid' => $permission['openid']));
@@ -68,11 +69,10 @@ class Auth extends \Overtrue\Wechat\Auth
 		return $this->authorizedUser = $user;
 	}
 
-
-	public function getAccessPermission($appid, $code)
+	public function getAccessPermission($code)
 	{
 		$params = array(
-			'appid' => $appid,
+			'appid' => $this->appId,
 			'code' => $code,
 			'grant_type' => 'authorization_code',
 			'component_appid' => $this->component_appid,
@@ -81,27 +81,5 @@ class Auth extends \Overtrue\Wechat\Auth
 		return $this->lastPermission = $this->http->get(self::API_TOKEN_GET, $params);
 	}
 
-	/**
-	 * 刷新 access_token
-	 *
-	 * @param string $appid
-	 * @param string $refreshToken
-	 *
-	 * @return Bag
-	 */
-	public function refresh($appid, $refreshToken)
-	{
-		$params = array(
-				'appid'         => $appid,
-				'grant_type'    => 'refresh_token',
-				'refresh_token' => $refreshToken,
-				'component_appid' => $this->component_appid,
-		);
 
-		$permission = $this->http->get(self::API_TOKEN_REFRESH, $params);
-
-		$this->lastPermission = array_merge($this->lastPermission, $permission);
-
-		return new Bag($permission);
-	}
 }
