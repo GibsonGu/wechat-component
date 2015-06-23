@@ -18,9 +18,11 @@ class WechatServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('gibson/wechat', 'wechat', __DIR__.'/../../..');
+		$path = realpath(__DIR__.'/../../../');
 
-		include __DIR__ . '/../../../filters.php';
+		$this->package('gibson/wechat', 'wechat', $path);
+
+		include $path.'/filters.php';
 	}
 
 	/**
