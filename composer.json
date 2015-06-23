@@ -13,7 +13,7 @@
         "overtrue/wechat": "^2.0"
     },
     "autoload": {
-        "psr-4": {
+        "psr-0": {
             "Gibson\\Wechat\\": "src/"
         }
       },
