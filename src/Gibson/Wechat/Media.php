@@ -5,11 +5,11 @@
  */
 class Media extends \Overtrue\Wechat\Media
 {
-	/**
-	 * @param string|AccessToken $accessToken
-	 */
-	public function __construct($accessToken)
-	{
-		$this->http = new Http($accessToken);
-	}
+    /**
+     * @param string|AccessToken $accessToken
+     */
+    public function __construct($accessToken)
+    {
+        $this->http = new Http($accessToken);
+    }
 }

@@ -7,15 +7,15 @@
  */
 class ComponentVerifyTicket
 {
-	protected static $cacheKey = 'gibson.wechat.component_verify_ticket';
+    protected static $cacheKey = 'gibson.wechat.component_verify_ticket';
 
-	public static function setTicket($componentVerifyTicket)
-	{
-		\Cache::forever(self::$cacheKey, $componentVerifyTicket);
-	}
+    public static function setTicket($componentVerifyTicket)
+    {
+        \Cache::forever(self::$cacheKey, $componentVerifyTicket);
+    }
 
-	public static function getTicket()
-	{
-		return \Cache::get(self::$cacheKey);
-	}
+    public static function getTicket()
+    {
+        return \Cache::get(self::$cacheKey);
+    }
 }

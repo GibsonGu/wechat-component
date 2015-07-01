@@ -1,13 +1,8 @@
 <?php
 
 return array(
-
-	'token' => '',
-
-	'encodingAESKey' => '',
-
-	'appid' => '',
-
-	'appsecret' => '',
-
+    'token' => '',
+    'encodingAESKey' => '',
+    'appid' => '',
+    'appsecret' => '',
 );
