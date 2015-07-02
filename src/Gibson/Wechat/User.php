@@ -3,7 +3,7 @@
 /**
  * 用户
  */
-class User
+class User extends \Overtrue\Wechat\User
 {
     /**
      * @param string|AccessToken $accessToken
