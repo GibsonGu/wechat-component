@@ -21,7 +21,7 @@ class Auth extends \Overtrue\Wechat\Auth
         $this->appId = $appId;
         $this->input = new Input();
         $this->http = new ComponentHttp(new ComponentAccessToken());
-        $this->component_appid = Config::get('wechat::appid');
+        $this->component_appid = Config::get('wechat.appid');
     }
 
     /**

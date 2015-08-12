@@ -28,7 +28,7 @@ class Component
     {
         $this->http = new ComponentHttp(new ComponentAccessToken());
 
-        $this->appid = \Config::get('wechat::appid');
+        $this->appid = \Config::get('wechat.appid');
     }
 
     /**

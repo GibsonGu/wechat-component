@@ -26,8 +26,8 @@ class ComponentAccessToken
         // 从缓存中获取不到token或设置了强制刷新
         if (!$this->token || $this->force) {
             $params = array(
-                'component_appid' => \Config::get('wechat::appid'),
-                'component_appsecret' => \Config::get('wechat::appsecret'),
+                'component_appid' => \Config::get('wechat.appid'),
+                'component_appsecret' => \Config::get('wechat.appsecret'),
                 'component_verify_ticket' => ComponentVerifyTicket::getTicket(),
             );
 
