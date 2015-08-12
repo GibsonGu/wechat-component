@@ -20,7 +20,7 @@ class WechatServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../../config/wechat.php' => config_path('wechat.php'),
+            realpath(__DIR__ . '/../../../config/config.php') => config_path('wechat.php'),
         ]);
     }
 
