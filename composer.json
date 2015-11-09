@@ -9,7 +9,6 @@
         }
     ],
     "require": {
-        "laravel/framework": "5.1.*",
         "overtrue/wechat": "^2.0"
     },
     "autoload": {
