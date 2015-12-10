@@ -1,5 +1,7 @@
 <?php namespace Gibson\Wechat;
 
+use Carbon\Carbon;
+
 /**
  * 全局通用 ComponentAccessToken
  */
@@ -38,7 +40,7 @@ class ComponentAccessToken
             $this->token = $response['component_access_token'];
 
             // 把token缓存起来
-            $expiresAt = \Carbon::now()->addSeconds($response['expires_in']);
+            $expiresAt = Carbon::now()->addSeconds($response['expires_in']);
             \Cache::put($this->cacheKey, $this->token, $expiresAt);
         }
 
