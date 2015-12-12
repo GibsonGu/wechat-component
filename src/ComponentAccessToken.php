@@ -1,6 +1,10 @@
-<?php namespace Gibson\Wechat;
+<?php
+
+namespace Gibson\Wechat;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
 
 /**
  * 全局通用 ComponentAccessToken
@@ -23,13 +27,13 @@ class ComponentAccessToken
      */
     public function getToken()
     {
-        $this->token = \Cache::get($this->cacheKey);
+        $this->token = Cache::get($this->cacheKey);
 
         // 从缓存中获取不到token或设置了强制刷新
         if (!$this->token || $this->force) {
             $params = array(
-                'component_appid' => \Config::get('wechat.appid'),
-                'component_appsecret' => \Config::get('wechat.appsecret'),
+                'component_appid'         => Config::get('wechat.appid'),
+                'component_appsecret'     => Config::get('wechat.appsecret'),
                 'component_verify_ticket' => ComponentVerifyTicket::getTicket(),
             );
 
@@ -41,7 +45,7 @@ class ComponentAccessToken
 
             // 把token缓存起来
             $expiresAt = Carbon::now()->addSeconds($response['expires_in']);
-            \Cache::put($this->cacheKey, $this->token, $expiresAt);
+            Cache::put($this->cacheKey, $this->token, $expiresAt);
         }
 
         return $this->token;

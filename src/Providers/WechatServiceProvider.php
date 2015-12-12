@@ -1,4 +1,6 @@
-<?php namespace Gibson\Wechat\Providers;
+<?php
+
+namespace Gibson\Wechat\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -20,7 +22,7 @@ class WechatServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            realpath(__DIR__ . '/../../../config/config.php') => config_path('wechat.php'),
+            realpath(__DIR__ . '/../../config/config.php') => config_path('wechat.php'),
         ]);
     }
 

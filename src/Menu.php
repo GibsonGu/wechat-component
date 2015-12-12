@@ -1,9 +1,11 @@
-<?php namespace Gibson\Wechat;
+<?php
+
+namespace Gibson\Wechat;
 
 /**
- * 门店
+ * 自定义菜单
  */
-class Store extends \Overtrue\Wechat\Store
+class Menu extends \Overtrue\Wechat\Menu
 {
     /**
      * @param string|AccessToken $accessToken

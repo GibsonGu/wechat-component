@@ -1,4 +1,6 @@
-<?php namespace Gibson\Wechat;
+<?php
+
+namespace Gibson\Wechat;
 
 use Overtrue\Wechat\Utils\Bag;
 
@@ -23,7 +25,6 @@ class QRCode extends \Overtrue\Wechat\QRCode
      * @param array $actionInfo
      * @param bool $temporary
      * @param int $expireSeconds
-     *
      * @return Bag
      */
     protected function create($actionName, $actionInfo, $temporary = true, $expireSeconds = null)

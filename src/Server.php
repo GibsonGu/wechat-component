@@ -1,4 +1,6 @@
-<?php namespace Gibson\Wechat;
+<?php
+
+namespace Gibson\Wechat;
 
 /**
  * 服务端

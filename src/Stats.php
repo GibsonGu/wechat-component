@@ -1,9 +1,11 @@
-<?php namespace Gibson\Wechat;
+<?php
+
+namespace Gibson\Wechat;
 
 /**
- * 用户组
+ * 数据统计
  */
-class Group extends \Overtrue\Wechat\Group
+class Stats extends \Overtrue\Wechat\Stats
 {
     /**
      * @param string|AccessToken $accessToken

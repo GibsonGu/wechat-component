@@ -1,4 +1,8 @@
-<?php namespace Gibson\Wechat;
+<?php
+
+namespace Gibson\Wechat;
+
+use Illuminate\Support\Facades\Cache;
 
 /**
  * 颜色接口
@@ -27,10 +31,10 @@ class Color extends \Overtrue\Wechat\Color
         $http = $this->http;
         $apiList = self::API_LIST;
 
-        return \Cache::get($key, function ($key) use ($http, $apiList) {
+        return Cache::get($key, function ($key) use ($http, $apiList) {
             $result = $http->get($apiList);
 
-            \Cache::put($key, $result['colors'], 86400);// 1 day
+            Cache::put($key, $result['colors'], 86400);// 1 day
 
             return $result['colors'];
         });

@@ -1,10 +1,10 @@
-<?php namespace Gibson\Wechat;
+<?php
 
-/**
- * 客服
- */
-class Staff extends \Overtrue\Wechat\Staff
+namespace Gibson\Wechat;
+
+class Notice extends \Overtrue\Wechat\Notice
 {
+
     /**
      * @param string|AccessToken $accessToken
      */

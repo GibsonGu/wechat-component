@@ -1,4 +1,6 @@
-<?php namespace Gibson\Wechat;
+<?php
+
+namespace Gibson\Wechat;
 
 class ComponentHttp extends HttpClient
 {

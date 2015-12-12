@@ -1,4 +1,6 @@
-<?php namespace Gibson\Wechat\Facades;
+<?php
+
+namespace Gibson\Wechat\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

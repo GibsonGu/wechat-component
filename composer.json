@@ -9,10 +9,12 @@
         }
     ],
     "require": {
-        "overtrue/wechat": "^2.0"
+        "overtrue/wechat": "^2.0",
+        "nesbot/carbon": "^1.21",
+        "illuminate/support": "^5.1"
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "Gibson\\Wechat\\": "src/"
         }
       },

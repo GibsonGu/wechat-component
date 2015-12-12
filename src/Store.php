@@ -1,8 +1,12 @@
-<?php namespace Gibson\Wechat;
+<?php
 
-class Notice extends \Overtrue\Wechat\Notice
+namespace Gibson\Wechat;
+
+/**
+ * 门店
+ */
+class Store extends \Overtrue\Wechat\Store
 {
-
     /**
      * @param string|AccessToken $accessToken
      */

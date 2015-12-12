@@ -1,4 +1,6 @@
-<?php namespace Gibson\Wechat;
+<?php
+
+namespace Gibson\Wechat;
 
 use Overtrue\Wechat\Exception;
 use Overtrue\Wechat\Utils\Http;
@@ -31,7 +33,6 @@ class HttpClient extends Http
      * @param string $method 请求类型   GET | POST
      * @param array $params 接口参数
      * @param array $options 其它选项
-     *
      * @return array | boolean
      */
     public function request($url, $method = self::GET, $params = array(), $options = array())
@@ -64,8 +65,8 @@ class HttpClient extends Http
         $contents = JSON::decode($response['data'], true);
 
         // while the response is an invalid JSON structure, returned the source data
-        if (!preg_match($textMIME, $response['content_type'])
-            || (JSON_ERROR_NONE !== json_last_error() && false === $contents)
+        if (!preg_match($textMIME,
+                $response['content_type']) || (JSON_ERROR_NONE !== json_last_error() && false === $contents)
         ) {
             return $response['data'];
         }
@@ -90,7 +91,6 @@ class HttpClient extends Http
      *
      * @param string $method
      * @param array $args
-     *
      * @return mixed
      */
     public function __call($method, $args)

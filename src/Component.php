@@ -1,4 +1,8 @@
-<?php namespace Gibson\Wechat;
+<?php
+
+namespace Gibson\Wechat;
+
+use Illuminate\Support\Facades\Config;
 
 /**
  * 授权给第三方平台
@@ -28,7 +32,7 @@ class Component
     {
         $this->http = new ComponentHttp(new ComponentAccessToken());
 
-        $this->appid = \Config::get('wechat.appid');
+        $this->appid = Config::get('wechat.appid');
     }
 
     /**
@@ -54,7 +58,7 @@ class Component
     public function queryAuth($authorization_code)
     {
         $params = array(
-            'component_appid' => $this->appid,
+            'component_appid'    => $this->appid,
             'authorization_code' => $authorization_code,
         );
 
@@ -70,7 +74,7 @@ class Component
     public function getAuthorizerInfo($authorizer_appid)
     {
         $params = array(
-            'component_appid' => $this->appid,
+            'component_appid'  => $this->appid,
             'authorizer_appid' => $authorizer_appid,
         );
 
@@ -87,9 +91,9 @@ class Component
     public function getAuthorizerOption($authorizer_appid, $option_name)
     {
         $params = array(
-            'component_appid' => $this->appid,
+            'component_appid'  => $this->appid,
             'authorizer_appid' => $authorizer_appid,
-            'option_name' => $option_name,
+            'option_name'      => $option_name,
         );
 
         return $this->http->jsonPost(self::API_GET_AUTHORIZER_OPTION, $params);
@@ -106,10 +110,10 @@ class Component
     public function setAuthorizerOption($authorizer_appid, $option_name, $option_value)
     {
         $params = array(
-            'component_appid' => $this->appid,
+            'component_appid'  => $this->appid,
             'authorizer_appid' => $authorizer_appid,
-            'option_name' => $option_name,
-            'option_value' => $option_value,
+            'option_name'      => $option_name,
+            'option_value'     => $option_value,
         );
 
         return $this->http->jsonPost(self::API_SET_AUTHORIZER_OPTION, $params);

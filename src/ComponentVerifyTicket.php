@@ -1,4 +1,8 @@
-<?php namespace Gibson\Wechat;
+<?php
+
+namespace Gibson\Wechat;
+
+use Illuminate\Support\Facades\Cache;
 
 /**
  * 推送component_verify_ticket协议
@@ -11,11 +15,11 @@ class ComponentVerifyTicket
 
     public static function setTicket($componentVerifyTicket)
     {
-        \Cache::forever(self::$cacheKey, $componentVerifyTicket);
+        Cache::forever(self::$cacheKey, $componentVerifyTicket);
     }
 
     public static function getTicket()
     {
-        return \Cache::get(self::$cacheKey);
+        return Cache::get(self::$cacheKey);
     }
 }

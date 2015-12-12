@@ -1,11 +1,12 @@
-<?php namespace Gibson\Wechat;
+<?php
+
+namespace Gibson\Wechat;
 
 /**
- * 图片上传服务
+ * 媒体素材
  */
-class Image extends \Overtrue\Wechat\Image
+class Media extends \Overtrue\Wechat\Media
 {
-
     /**
      * @param string|AccessToken $accessToken
      */
