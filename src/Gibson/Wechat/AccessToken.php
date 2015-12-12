@@ -46,13 +46,12 @@ class AccessToken
      */
     public function getToken()
     {
-        $this->token = \Cache::get(sprintf($this->cacheKey, $this->authorizer_appid));
+        $cacheKey = sprintf($this->cacheKey, $this->authorizer_appid);
 
-        // 从缓存中获取不到token
-        if (!$this->token) {
+        $this->token = \Cache::get($cacheKey, function () use ($cacheKey) {
             $params = array(
-                'component_appid' => \Config::get('wechat::appid'),
-                'authorizer_appid' => $this->authorizer_appid,
+                'component_appid'          => \Config::get('wechat::appid'),
+                'authorizer_appid'         => $this->authorizer_appid,
                 'authorizer_refresh_token' => $this->authorizer_refresh_token,
             );
 
@@ -60,12 +59,14 @@ class AccessToken
             $response = $http->jsonPost(self::API_AUTHORIZER_TOKEN, $params);
 
             // 设置token
-            $this->token = $response['authorizer_access_token'];
+            $token = $response['authorizer_access_token'];
 
             // 把token缓存起来
             $expiresAt = Carbon::now()->addSeconds($response['expires_in']);
-            \Cache::put($this->cacheKey, $this->token, $expiresAt);
-        }
+            \Cache::put($cacheKey, $token, $expiresAt);
+
+            return $token;
+        });
 
         return $this->token;
     }
