@@ -2,6 +2,7 @@
 
 namespace Gibson\Wechat;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 
 /**
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Config;
  */
 class Component
 {
+    const COMPONENT_LOGIN_PAGE = 'https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid=%s&pre_auth_code=%s&redirect_uri=%s';
     const API_CREATE_PREAUTHCODE = 'https://api.weixin.qq.com/cgi-bin/component/api_create_preauthcode';
     const API_QUERY_AUTH = 'https://api.weixin.qq.com/cgi-bin/component/api_query_auth';
     const API_GET_AUTHORIZER_INFO = 'https://api.weixin.qq.com/cgi-bin/component/api_get_authorizer_info';
@@ -28,25 +30,51 @@ class Component
      */
     protected $http;
 
+    protected $preAuthCodeCacheKey = 'gibson.wechat.pre_auth_code';
+
     public function __construct()
     {
         $this->http = new ComponentHttp(new ComponentAccessToken());
 
-        $this->appid = Config::get('wechat.appid');
+        $this->appid = Config::get('wechat.componentAppId');
     }
 
     /**
-     * 获取预授权码
+     * 第三方平台授权页
      *
-     * @return mixed
+     * @param $redirect
+     * @return string
+     */
+    public function loginPage($redirect)
+    {
+        $preAuthCode = $this->createPreAuthCode();
+
+        // 拼接出微信公众号登录授权页面url
+        return sprintf(self::COMPONENT_LOGIN_PAGE, $this->appid, $preAuthCode, urlencode($redirect));
+    }
+
+    /**
+     * 该API用于获取预授权码。
+     * 预授权码用于公众号授权时的第三方平台方安全验证。
+
+     *
+*@return mixed
      */
     public function createPreAuthCode()
     {
-        $params = array(
-            'component_appid' => $this->appid,
-        );
+        return Cache::get($this->preAuthCodeCacheKey, function () {
+            $response = $this->http->jsonPost(self::API_CREATE_PREAUTHCODE, [
+                'component_appid' => $this->appid,
+            ]);
 
-        return $this->http->jsonPost(self::API_CREATE_PREAUTHCODE, $params);
+            $pre_auth_code = $response['pre_auth_code'];
+
+            // 把pre_auth_code缓存起来
+            $expiresAt = Carbon::now()->addSeconds($response['expires_in']);
+            Cache::put($this->preAuthCodeCacheKey, $pre_auth_code, $expiresAt);
+
+            return $pre_auth_code;
+        });
     }
 
     /**

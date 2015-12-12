@@ -1,8 +1,11 @@
 <?php
 
 return array(
-    'token' => '',
+    'encodingToken' => '',
+
     'encodingAESKey' => '',
-    'appid' => '',
-    'appsecret' => '',
+
+    'componentAppId' => '',
+
+    'componentAppSecret' => '',
 );
