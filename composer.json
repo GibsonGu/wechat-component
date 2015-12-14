@@ -11,7 +11,8 @@
     "require": {
         "overtrue/wechat": "^2.0",
         "nesbot/carbon": "^1.21",
-        "illuminate/support": "^5.1"
+        "illuminate/support": "^5.1",
+        "illuminate/http": "^5.1"
     },
     "autoload": {
         "psr-4": {
