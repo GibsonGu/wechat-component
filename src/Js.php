@@ -2,6 +2,7 @@
 
 namespace Gibson\Wechat;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 
 class Js extends \Overtrue\Wechat\Js
