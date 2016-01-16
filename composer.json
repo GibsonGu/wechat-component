@@ -10,7 +10,7 @@
     ],
     "require": {
         "laravel/framework": "4.2.*",
-        "overtrue/wechat": "~2.1"
+        "overtrue/wechat": "~2.0"
     },
     "autoload": {
         "psr-0": {
