@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "overtrue/wechat": "^2.0",
+        "overtrue/wechat": "^2.1",
         "nesbot/carbon": "^1.21",
         "illuminate/support": "^5.1",
         "illuminate/http": "^5.1"
