@@ -52,7 +52,7 @@ class Js extends \Overtrue\Wechat\Js
     {
         $cacheKey = sprintf($this->cacheKey, $this->appId);
 
-        return Cache::get($cacheKey, function () use ($cacheKey) {
+        return Cache::get($cacheKey, function ($cacheKey) {
             $response = $this->http->get(self::API_TICKET);
 
             // 设置token

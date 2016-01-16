@@ -62,7 +62,9 @@ class Component
      */
     public function createPreAuthCode()
     {
-        return Cache::get($this->preAuthCodeCacheKey, function () {
+        $cacheKey = $this->preAuthCodeCacheKey;
+
+        return Cache::get($cacheKey, function ($cacheKey) {
             $response = $this->http->jsonPost(self::API_CREATE_PREAUTHCODE, [
                 'component_appid' => $this->appid,
             ]);
@@ -71,7 +73,7 @@ class Component
 
             // 把pre_auth_code缓存起来
             $expiresAt = Carbon::now()->addSeconds($response['expires_in']);
-            Cache::put($this->preAuthCodeCacheKey, $pre_auth_code, $expiresAt);
+            Cache::put($cacheKey, $pre_auth_code, $expiresAt);
 
             return $pre_auth_code;
         });
