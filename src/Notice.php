@@ -25,6 +25,6 @@ class Notice extends \Overtrue\Wechat\Notice
      */
     public function getIndustry()
     {
-        return $this->http->jsonPost(self::API_GET_INDUSTRY);
+        return $this->http->get(self::API_GET_INDUSTRY);
     }
 }
