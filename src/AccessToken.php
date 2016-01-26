@@ -52,7 +52,7 @@ class AccessToken
     {
         $cacheKey = sprintf($this->cacheKey, $this->authorizer_appid);
 
-        $this->token = Cache::get($cacheKey, function ($cacheKey) {
+        $this->token = Cache::get($cacheKey, function () use ($cacheKey) {
             $params = array(
                 'component_appid'          => Config::get('wechat.componentAppId'),
                 'authorizer_appid'         => $this->authorizer_appid,

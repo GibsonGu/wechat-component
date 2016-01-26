@@ -64,7 +64,7 @@ class Component
     {
         $cacheKey = $this->preAuthCodeCacheKey;
 
-        return Cache::get($cacheKey, function ($cacheKey) {
+        return Cache::get($cacheKey, function () use ($cacheKey) {
             $response = $this->http->jsonPost(self::API_CREATE_PREAUTHCODE, [
                 'component_appid' => $this->appid,
             ]);

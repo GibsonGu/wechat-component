@@ -31,7 +31,7 @@ class Color extends \Overtrue\Wechat\Color
         $http = $this->http;
         $apiList = self::API_LIST;
 
-        return Cache::get($key, function ($key) use ($http, $apiList) {
+        return Cache::get($key, function () use ($key, $http, $apiList) {
             $result = $http->get($apiList);
 
             Cache::put($key, $result['colors'], 86400);// 1 day
