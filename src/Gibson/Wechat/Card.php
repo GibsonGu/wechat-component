@@ -31,7 +31,7 @@ class Card extends \Overtrue\Wechat\Card
         $http = $this->http;
         $apiTicket = self::API_TICKET;
 
-        return $this->ticket = \Cache::get($key, function ($key) use ($http, $apiTicket) {
+        return $this->ticket = \Cache::get($key, function () use ($key, $http, $apiTicket) {
             $result = $http->get($apiTicket);
 
             \Cache::put($key, $result['ticket'], $result['expires_in']);
