@@ -82,6 +82,19 @@ class Component
     }
 
     /**
+     * 删除已经使用的预授权码.
+     *
+     * @param $identification
+     * @return mixed
+     */
+    public function forgetPreAuthCode($identification)
+    {
+        $cacheKey = sprintf($this->preAuthCodeCacheKey, $identification);
+
+        return Cache::forget($cacheKey);
+    }
+
+    /**
      * 使用授权码换取公众号的授权信息
      *
      * @param $authorization_code
