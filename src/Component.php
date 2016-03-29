@@ -31,7 +31,7 @@ class Component
      */
     protected $http;
 
-    protected $preAuthCodeCacheKey = 'gibson.wechat.pre_auth_code';
+    protected $preAuthCodeCacheKey = 'gibson.wechat.pre_auth_code.%';
 
     public function __construct()
     {
@@ -44,11 +44,12 @@ class Component
      * 第三方平台授权页
      *
      * @param $redirect
+     * @param null $identification
      * @return string
      */
-    public function loginPage($redirect)
+    public function loginPage($redirect, $identification = null)
     {
-        $preAuthCode = $this->createPreAuthCode();
+        $preAuthCode = $this->createPreAuthCode($identification);
 
         // 拼接出微信公众号登录授权页面url
         return sprintf(self::COMPONENT_LOGIN_PAGE, $this->appid, $preAuthCode, urlencode($redirect));
@@ -58,11 +59,12 @@ class Component
      * 该API用于获取预授权码。
      * 预授权码用于公众号授权时的第三方平台方安全验证。
      *
+     * @param $identification
      * @return mixed
      */
-    public function createPreAuthCode()
+    public function createPreAuthCode($identification)
     {
-        $cacheKey = $this->preAuthCodeCacheKey;
+        $cacheKey = sprintf($this->preAuthCodeCacheKey, $identification);
 
         return Cache::get($cacheKey, function () use ($cacheKey) {
             $response = $this->http->jsonPost(self::API_CREATE_PREAUTHCODE, [
