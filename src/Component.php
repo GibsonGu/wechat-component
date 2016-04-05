@@ -31,7 +31,7 @@ class Component
      */
     protected $http;
 
-    protected $preAuthCodeCacheKey = 'gibson.wechat.pre_auth_code.%';
+    protected $preAuthCodeCacheKey = 'gibson.wechat.pre_auth_code.%s';
 
     public function __construct()
     {
