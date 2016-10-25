@@ -37,7 +37,7 @@ class QRCode extends \Overtrue\Wechat\QRCode
         );
 
         if ($temporary) {
-            $params['expire_seconds'] = min($expireSeconds, 7 * self::DAY);
+            $params['expire_seconds'] = min($expireSeconds, 30 * self::DAY);
         }
 
         return new Bag($this->http->jsonPost(self::API_CREATE, $params));
